@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>examples.mycompany.com</groupId>
+  <artifactId>camel-karaf-noblueprint</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi.cmpn</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+  		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core-osgi</artifactId>
+			<version>2.21.0</version>
+		</dependency>
+		
+  </dependencies>
+  <build>
+  <plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>3.0.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+					</instructions>
+				</configuration>
+                <executions>
+                  <execution>
+                    <id>baseline</id>
+                    <phase>verify</phase>
+                    <goals>
+                      <goal>baseline</goal>
+                    </goals>
+                  </execution>
+                </executions>                  
+			</plugin>
+
+ 
+  </plugins>
+  </build>
+  <packaging>bundle</packaging>
+  <description>To install in Karaf run  
+feature:repo-add camel 2.21.0
+feature:install camel-scr
+bundle:install mvn:examples.mycompany.com/camel-karaf-noblueprint/0.0.1-SNAPSHOT  
+(after a successful mvn install)
+</description>
+</project>
